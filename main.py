@@ -4,7 +4,16 @@ import os
 ruta_archivo = os.path.join(os.path.dirname(__file__), "datasets", "usu_hogar_T324.txt")
 
 # Leer el archivo y convertirlo en una lista
-with open(ruta_archivo, "r", encoding="utf-8") as file:
-    lista_datos = file.read().splitlines()  # Divide el contenido por líneas
+with open(ruta_archivo, "r", encoding="utf-8") as file: #convierto los datos a un diccionario y lo separo por punto y coma
+    lista_datos = [linea.strip().split(";") for linea in file.readlines()]
+    
 
-print(lista_datos)  # Ver la lista resultante
+for lista in lista_datos:
+    lista = [dato.strip() for dato in lista]  # Eliminar espacios en blanco de cada dato
+    print("codusu  ano4  trimestre  nro_hogar  realizada  region  mas_500  aglomerado")
+    print("============================================================================")
+    print (lista)
+    print("============================================================================")
+
+
+
