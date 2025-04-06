@@ -8,3 +8,5 @@ with open(ruta_archivo, "r", encoding="utf-8") as file:
     lista_datos = file.read().splitlines()  # Divide el contenido por líneas
 
 print(lista_datos)  # Ver la lista resultante
+
+print ("hola prueba")
