@@ -8,12 +8,4 @@ with open(ruta_archivo, "r", encoding="utf-8") as file: #convierto los datos a u
     lista_datos = [linea.strip().split(";") for linea in file.readlines()]
     
 
-for lista in lista_datos:
-    lista = [dato.strip() for dato in lista]  # Eliminar espacios en blanco de cada dato
-    print("codusu  ano4  trimestre  nro_hogar  realizada  region  mas_500  aglomerado")
-    print("============================================================================")
-    print (lista)
-    print("============================================================================")
-
-
 
