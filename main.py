@@ -1,13 +1,14 @@
 import os
+import pandas as pd
+from src import cleandata
 
-# Obtener la ruta del archivo dentro de "datasets"
+
 ruta_archivo = os.path.join(os.path.dirname(__file__), "datasets", "usu_hogar_T324.txt")
+lista_datos = pd.read_csv(ruta_archivo, encoding="utf-8", delimiter=";")  # Separar por punto y coma
 
-# Leer el archivo y convertirlo en una lista
-with open(ruta_archivo, "r", encoding="utf-8") as file: #convierto los datos a un diccionario y lo separo por punto y coma
-    lista_datos = [linea.strip().split(";") for linea in file.readlines()]
-    
+print(lista_datos.head())  # Verifica las primeras filas del DataFrame
 
 
-
-print ("hola prueba")
+#lista_datos.dropna(inplace=True)  # Eliminar filas con valores nulos
+lista_datos = cleandata.cleaner(lista_datos)  # Limpiar los datos
+print(lista_datos)
