@@ -1,10 +1,11 @@
 import os
-from src import cleandata
+
+
 
 
 ruta_archivo = os.path.join(os.path.dirname(__file__), "datasets", "usu_individual_T324.txt")
 
-with open (ruta_archivo, 'r') as contenido:
+with open (ruta_archivo, 'r', encoding="utf-8") as contenido:
     lista_datos = contenido.read()
 
 spliteado = lista_datos.splitlines()
