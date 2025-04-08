@@ -10,4 +10,4 @@ with open(ruta_archivo, "r", encoding="utf-8") as archivo:
 
 #lista_datos.dropna(inplace=True)  # Eliminar filas con valores nulos
 #data_base = cleandata.cleaner(data_base)  # Limpiar los datos
-print(data_base[])
+print(data_base)
