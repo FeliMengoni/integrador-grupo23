@@ -1,18 +1,16 @@
 import os
-from src import cleandata
 
 
-ruta_archivo = os.path.join(os.path.dirname(__file__), "datasets", "usu_individual_T324.txt")
+ruta_archivo = os.path.join(os.path.dirname(__file__), "datasets","individual", "usu_individual_T423.txt")
 
 with open (ruta_archivo, 'r') as contenido:
     lista_datos = contenido.read()
 
 spliteado = lista_datos.splitlines()
-del spliteado[0]
 
 contaH = 0
 contaM = 0
-for l in spliteado:
+for l in spliteado[1:]:
     linea = l.split(';')
     if int(linea[11]) == 1:
         contaH = contaH + int(linea[9])
