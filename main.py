@@ -10,6 +10,8 @@ with open(ruta_individuos, 'r', encoding='utf-8') as archivo_individuos:
    datosU = list(csv.DictReader(archivo_individuos, delimiter=';'))
 
 
+print(datosU[0:2])
+
 
 
 
