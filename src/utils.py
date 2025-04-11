@@ -4,13 +4,10 @@ from constants import Data
 
 def genero_to_string (lista_de_datos):
     """Funcion que agrega culumna de Masculino o Femenino"""
-    lista_de_datos[0].append('CH04_str')
-    for linea in lista_de_datos[1:]:
-        if int(linea[11]) == 1:
-            linea.append('Masculino')
-        if int(linea[11]) == 2:
-            linea.append('Femenino')
-            
+    if dic['CH04'] == 1:
+        dic['CH04_str'] = 'Masculino'
+    elif dic['CH04_str'] == 2:
+        dic['CH04_str'] = 'Femenino'            
 
 def nivel_to_string(lista_de_datos):
     """Función que agrega columna de nivel educativo"""
