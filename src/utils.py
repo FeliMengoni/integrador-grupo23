@@ -45,15 +45,16 @@ def condicion_laboral_to_string (lista_de_datos):
 
 def universitario (lista_de_datos):     #NO ESTA TERMINADA
     """Funcion que agrega culumna de universitario"""
-    lista_de_datos[0].append('universitario')
-    for linea in lista_de_datos[1:]:
+    for linea in lista_de_datos:
         if ("aca hay q poner si es mayor d edad"):
             if (int(linea[26]) == 5 or 6):
-                linea.append(1)
+                linea['UNIVERSITARIO']=1
             else:
                 linea.append(0)
         else:
             linea.append(2)
+
+
 
 
         
