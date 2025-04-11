@@ -1,3 +1,7 @@
+import csv
+from pathlib import Path
+from constants import Data
+
 def genero_to_string (lista_de_datos):
     """Funcion que agrega culumna de Masculino o Femenino"""
     lista_de_datos[0].append('CH04_str')
@@ -28,33 +32,30 @@ def nivel_to_string(lista_de_datos):
 
 
 
-def condicion_laboral_to_string (lista_de_datos):
+def condicion_laboral_to_string (diccionario): #HAY QUE CAMBIAR NIVEL ED POR ESTADO Y ESTADO POR CAT_OCUP
     """Funcion que agrega culumna de condicion laboral"""
-    lista_de_datos[0].append('CONDICION_LABORAL')
-    for linea in lista_de_datos[1:]:
-        if (int(linea[27]) == 1) and (int(linea[28])== 1 or 2):
-            linea.append('Ocupado autónomo')
-        if (int(linea[27]) == 1) and (int(linea[28])== 3 or 4 or 9):
-            linea.append('Ocupado dependiente')
-        if (int(linea[27]) == 2):
-            linea.append('Desocupado')
-        if (int(linea[27]) == 3):
-            linea.append('Inactivo')
-        if (int(linea[27]) == 4):
-            linea.append('Fuera de categoria')
+    for linea in diccionario:
+        if (int(diccionario["NIVEL_ED"]) == 1) and (int(diccionario["ESTADO"])== 1 or 2):
+            diccionario["CONDICION_LABORAL"]=('Ocupado autónomo')
+        if (int(diccionario["NIVEL_ED"]) == 1) and (int(linea["ESTADO"])== 3 or 4 or 9):
+            diccionario["CONDICION_LABORAL"]=('Ocupado dependiente')
+        if (int(diccionario["NIVEL_ED"]) == 2):
+            diccionario["CONDICION_LABORAL"]=('Desocupado')
+        if (int(diccionario["NIVEL_ED"]) == 3):
+            diccionario["CONDICION_LABORAL"]=('Inactivo')
+        if (int(diccionario["NIVEL_ED"]) == 4):
+            diccionario["CONDICION_LABORAL"]=('Fuera de categoria')  
 
-def universitario (lista_de_datos):     #NO ESTA TERMINADA
+def universitario (diccionario):     
     """Funcion que agrega culumna de universitario"""
-    lista_de_datos[0].append('universitario')
-    for linea in lista_de_datos[1:]:
-        if ("aca hay q poner si es mayor d edad"):
-            if (int(linea[26]) == 5 or 6):
-                linea.append(1)
+    for linea in diccionario:
+        if (int(diccionario["CH06"])>=18):
+            if (int(diccionario["NIVEL_ED"]) == 5 or 6):
+                diccionario[universitario] = 1
             else:
-                linea.append(0)
+                diccionario[universitario] = 0
         else:
-            linea.append(2)
-
+            diccionario[universitario] = 2
 
         
     
