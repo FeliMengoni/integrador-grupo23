@@ -4,5 +4,4 @@ def limpiador (datos):
         for i in linea:
             i.strip()
 
-
   
