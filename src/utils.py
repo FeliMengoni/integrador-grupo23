@@ -2,12 +2,12 @@ import csv
 from pathlib import Path
 from constants import Data
 
-def genero_to_string (lista_de_datos):
+def genero_to_string (diccionario):
     """Funcion que agrega culumna de Masculino o Femenino"""
-    if dic['CH04'] == 1:
-        dic['CH04_str'] = 'Masculino'
-    elif dic['CH04_str'] == 2:
-        dic['CH04_str'] = 'Femenino'            
+    if diccionario['CH04'] == 1:
+        diccionario['CH04_str'] = 'Masculino'
+    elif diccionario['CH04_str'] == 2:
+        diccionario['CH04_str'] = 'Femenino'            
 
 def nivel_to_string(diccionario):
     """Función que agrega columna de nivel educativo"""
