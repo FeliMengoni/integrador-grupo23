@@ -4,9 +4,12 @@ def genero_to_string (dic):
         dic['CH04_str'] = 'Masculino'
     elif dic['CH04_str'] == 2:
         dic['CH04_str'] = 'Femenino'            
+    else:
+        dic['CH04_str'] = None
 
 def nivel_to_string(lista_de_datos):
     """Función que agrega columna de nivel educativo"""
+    
     lista_de_datos[0].append('NIVEL_ED_str')
     for linea in lista_de_datos[1:]:
         match int(linea[26]):
