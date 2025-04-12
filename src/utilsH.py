@@ -1,30 +1,25 @@
-def tipo_hogar (lista_de_datos):
+def tipo_hogar (diccionario_de_datos):
     """Funcion que agrega culumna de tipo de hogar"""
-    lista_de_datos[0].append('TIPO_HOGAR')
-    indice_de_IX_TOT = lista_de_datos[0].index('IX_TOT')
-
-    for linea in lista_de_datos[1:]:
-        match int(indice_de_IX_TOT):
+    for linea in diccionario_de_datos:
+        match int(linea("IX_TOT")):
             case 1:
-                linea.append('Unipersonal')
+                linea['TIPO_HOGAR']= 'unipersonal'
             case 2|3|4:
-                linea.append('Nuclear')
-        if int('IX_TOT') >= 5:
-            linea.append('Extensa')
+                linea['TIPO_HOGAR']='Nuclear'
+        if int(linea('IX_TOT')) >= 5:
+            linea['TIPO_HOGAR']= 'Extensa'
 
 
-def material_techumbre (lista_de_datos):
+def material_techumbre (diccionario_de_datos):
     """Funcion que agrega culumna de material de techumbre"""
-    lista_de_datos[0].append('MATERIAL_TECHUMBRE')
-    indice_de_MATERIAL_TECHUMBRE = lista_de_datos[0].index('MATERIAL_TECHUMBRE')
-    for linea in lista_de_datos[1:]:
-        match int(linea[indice_de_MATERIAL_TECHUMBRE]):
+    for linea in diccionario_de_datos:
+        match int(linea['V4']):
             case 1|2|3|4:
-                linea.append('Material durable')
+                linea['MATERIAL_TECHUMBRE']='Material durable'
             case 5|6|7:
-                linea.append('Material precario')
+                linea['MATERIAL_TECHUMBRE']= 'Material precario'
 
-def densidad_hogar (lista_de_datos):
+def densidad_hogar (diccionario_de_datos):
     """Funcion que agrega culumna de densidad de hogar"""
     lista_de_datos[0].append('DENSIDAD_HOGAR')
     indice_de_IX_TOT = lista_de_datos[0].index('IX_TOT')
