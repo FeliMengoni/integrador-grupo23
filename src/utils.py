@@ -36,7 +36,7 @@ def condicion_laboral_to_string (dic):
     if (int(dic["ESTADO"]) == 2):
         dic["CONDICION_LABORAL"]=('Desocupado')
     if (int(dic["ESTADO"]) == 3):
-        dic["CONDICION_LABORAL"]=('Inactivo')
+        dic["CONDICION_LABORAL"]=('Inactivo')ho
     if (int(dic["ESTADO"]) == 4):
         dic["CONDICION_LABORAL"]=('Fuera de categoria')  
 
