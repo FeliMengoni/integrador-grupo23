@@ -22,3 +22,10 @@ def porcentaje_de_leer(diccionario): #Falta terminar
             conteos["Porcentaje Capaces"]=(conteos['capaces']/total)*100
             conteos["Porcentaje No Capaces"]=(conteos['no_capaces']/total)*100
     return resultados
+
+def menor_desocupacion (lista_dic):
+    anio,trim=None,None
+    desempleo= 0
+    lista_dic_orden = sorted(lista_dic, key=lambda x: (x['ANO4'],x['TRIMESTRE']))
+    for dic in lista_dic:
+        if dic

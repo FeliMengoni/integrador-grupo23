@@ -15,7 +15,7 @@ with open(ruta_hogares, 'r', encoding='utf-8') as archivo_hogares:
    datosH = list(csv.DictReader(archivo_hogares, delimiter=';'))
 
 datacleaner.cleanerU(datosU)
-datacleaner.cleanerH(datosH)
+datacleaner.cleanerH(datosH)  
    
 print(datosU[:5])
 print('='*50)
