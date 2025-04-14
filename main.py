@@ -11,14 +11,9 @@ ruta_individuos = Path('datasets') / 'usu_individual_T423.txt'
 with open(ruta_individuos, 'r', encoding='utf-8') as archivo_individuos:
    datosU = list(csv.DictReader(archivo_individuos, delimiter=';'))
 
-for line in datosU[:5]:
-   datacleaner.cleaner(line)
-   utils.genero_to_string(line)
-   utils.nivel_to_string(line)
-   utils.condicion_laboral_to_string(line)
-   utils.universitario(line)
+datacleaner.cleaner(datosU)
    
-   print(line)
+print(datosU[:5])
 
 
 
