@@ -15,13 +15,13 @@ with open(ruta_individuos, 'r', encoding='utf-8') as archivo_individuos:
 with open(ruta_hogares, 'r', encoding='utf-8') as archivo_hogares:
    datosH = list(csv.DictReader(archivo_hogares, delimiter=';'))
 
-#datacleaner.cleanerU(datosU)
-#datacleaner.cleanerH(datosH)
+datacleaner.cleanerU(datosU)
+datacleaner.cleanerH(datosH)
 utilsB.porcentaje_de_leer(datosU)
    
-#print(datosU[:5])
-#print('='*50)
-#print(datosH[:5])
+print(datosU[:5])
+print('='*50)
+print(datosH[:5])
 
 
 
