@@ -22,3 +22,15 @@ def porcentaje_de_leer(diccionario): #Falta terminar
             conteos["Porcentaje Capaces"]=(conteos['capaces']/total)*100
             conteos["Porcentaje No Capaces"]=(conteos['no_capaces']/total)*100
     return resultados
+
+def no_nacidas (lista): # Recibe la lista de diccionarios
+    """Porcentaje de personas no nacidas en ARG que hayan cursado nivel universitario o mayor"""
+    anio = int(input('Inserte el año: '))
+    trim = int(input('Inserte el trimestre: '))
+    for dic in lista:
+        if (anio < dic['ANO4']) or (dic['ANO4'] == anio and trim < dic['TRIMESTRE']):
+            continue
+        elif anio == dic['ANO4'] and trim == dic['TRIMESTRE']:
+            
+        else:
+            break
