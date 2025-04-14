@@ -36,9 +36,21 @@ def densidad_hogar(diccionario_de_datos):
             linea["DENSIDAD_HOGAR"] = "Alto"
 
 
-def condicion_de_habitabilidad (lista_de_datos):  #NO ESTA TERMINADA (hay q hablarlo)
+def condicion_de_habitabilidad (diccionario_de_datos): 
     """Funcion que agrega culumna de condicion de habitabilidad"""
-    
+    for linea in diccionario_de_datos:
+        puntos=(3-int(linea['IV9']))+ (2-int(linea['IV8'])) + (3-int(linea['IV6']))
+        puntos+= (3-int(linea['IV7'])) + (3-int(linea['IV10']))
+        match puntos:
+            case 14:
+             linea['condicion_de_habitabilidad']= 'bueno'
+            case 13|12|11|10:
+                linea['condicion_de_habitabilidad']= 'saludable'
+            case 9|8|7|6|5:
+                linea['condicion_de_habitabilidad']= 'regular'
+            case 4|3|2|1|0:
+                linea['condicion_de_habitabilidad']= 'insuficiente'
+        
 
     
             
