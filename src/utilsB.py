@@ -40,3 +40,11 @@ def no_nacidas (lista): # Recibe la lista de diccionarios / CH15: donde nacio
         else:
             break
     print(round(aprobados/cant_personas*100, 2))
+
+def menor_desocupacion (lista_dic):
+    anio,trim=None,None
+    desempleo= 0
+    lista_dic_orden = sorted(lista_dic, key=lambda x: (x['ANO4'],x['TRIMESTRE']))
+    for dic in lista_dic:
+        if dic
+
