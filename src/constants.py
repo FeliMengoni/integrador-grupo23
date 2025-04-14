@@ -5,6 +5,3 @@ CARPETA_HOGAR = Path('datasets') / "hogar"
 
 
 print(CARPETA_HOGAR)
-
-
-

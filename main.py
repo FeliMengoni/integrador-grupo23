@@ -14,8 +14,3 @@ with open(ruta_individuos, 'r', encoding='utf-8') as archivo_individuos:
 datacleaner.cleaner(datosU)
    
 print(datosU[:5])
-
-
-
-
-  
