@@ -20,9 +20,9 @@ datacleaner.cleanerH(datosH)
 utilsB.porcentaje_de_leer(datosU)
 utilsB.ranking_aglomerados(datosU)
    
-print(datosU[:5])
+"""print(datosU[:5])
 print('='*50)
-print(datosH[:5])
+print(datosH[:5])"""
 
 
 

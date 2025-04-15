@@ -53,13 +53,17 @@ def no_nacidas (lista): # Recibe la lista de diccionarios / CH15: donde nacio
     for dic in lista_dic:
         if dic:"""
 
-def ranking_aglomerados (lista_dic_I):#creanear
-    """Definir que hace la funcion"""  
-    new_dic = {}  
-    for dicI in lista_dic_I:
-        if dicI['NIVEL_ED_str'] == 'Superior o universitario':
-            #if new_dic[dicI['AGLOMERADO']]['Cant'] == None:
-            new_dic[dicI['AGLOMERADO']]['Cant'] = 0
-            new_dic[dicI['AGLOMERADO']]['Cant'] = new_dic[dicI['AGLOMERADO']]['Cant'] + dicI['PONDERA']
-    print(new_dic)
+def ranking_aglomerados (lista_dic_I, lista_dic_H):#creanear
+    """Ranking 5 aglomerados mayor porcentaje con dos o mas ocupantes con estudios universitarios"""  
+    lista_ordenada_I = sorted(lista_dic_I, key=lambda x: x["AGLOMERADO"])
+    lista_ordenada_H = sorted(lista_dic_H, key=lambda x: x["AGLOMERADO"])
+    new_list = []
+    dic = {}
+    cont_hogares = 0
+    for line in lista_ordenada_I:
+        aglo = line['AGLOMERADO']
+        if line['IX_Tot'] < 2:
+            continue
+        else:
+            
             
