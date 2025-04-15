@@ -17,7 +17,7 @@ with open(ruta_hogares, 'r', encoding='utf-8') as archivo_hogares:
 
 datacleaner.cleanerU(datosU)
 datacleaner.cleanerH(datosH)
-#utilsB.porcentaje_de_leer(datosU)
+utilsB.porcentaje_de_leer(datosU)
 utilsB.ranking_aglomerados(datosU)
    
 print(datosU[:5])

@@ -1,27 +1,29 @@
-def porcentaje_de_leer(dic): #Falta terminar
-    resultados={}
-    categorias={
+def porcentaje_de_leer(dic): # Recibe la lista de diccionarios 
+    """Porcentaje de personas capaces de leer"""
+    """Recibe la lista de diccionarios y devuelve el porcentaje de personas capaces de leer y de no leer"""
+    resultados={} # almacena los resultados por año
+    categorias={    # diccionario para clasificar las categorias
         1:"capaces",
         2:"no_capaces",
-        3:"menores",
-    }
-    for linea in dic:
+        3:"menores", }
+    for linea in dic:   #recorre la lista de diccionarios
+        #obtengo los datos necesarios
         anio=(linea['ANO4'])
         trimestre=(linea["TRIMESTRE"])
         capacidad_de_leer=int(linea['CH09'])
         cantidad=(linea["PONDERA"])
-        if anio not in resultados:
-            resultados[anio]={'capaces':0,'no_capaces':0}
-        if trimestre==4:
-            categoria=categorias.get(capacidad_de_leer)
-            if categoria!=3:
-                resultados[anio][categoria]+=cantidad
-    for anio, conteos in resultados.items():
+        categoria=categorias.get(capacidad_de_leer)
+        if categoria is not None and categoria!="menores": #si no es menor de edad y categoria no esta vacia
+            if anio not in resultados: # Si no existe el año en resultados, lo inicializo
+                resultados[anio]={categoria: 0 for categoria in categorias.values()}
+            if trimestre==4:    # Si es el trimestre 4
+                if categoria!=3: # Si no es menor de edad contabilizo
+                    resultados[anio][categoria]+=cantidad
+    for anio, conteos in resultados.items():#calcular los promedios
         total=sum(conteos.values()) # Total de personas
-        print(total)
         if total > 0:
-            conteos["Porcentaje Capaces"]=(conteos['capaces']/total)*100
-            conteos["Porcentaje No Capaces"]=(conteos['no_capaces']/total)*100
+            conteos["Porcentaje Capaces"]=round((conteos['capaces']/total)*100, 2)
+            conteos["Porcentaje No Capaces"]=round((conteos['no_capaces']/total)*100, 2)
             print(f"Porcentaje de personas capaces de leer: {conteos['Porcentaje Capaces']}%")
             print(f"Porcentaje de personas no capaces de leer: {conteos['Porcentaje No Capaces']}%")
     
