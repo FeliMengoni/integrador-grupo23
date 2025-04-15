@@ -61,11 +61,9 @@ def ranking_aglomerados (lista_dic_I, lista_dic_H):#creanear
     dic = {}
     cont_hogares = 0
     linea_anterior = ''
+
     for line in lista_ordenada_I:
         aglo = line['AGLOMERADO']
-        """if line['IX_Tot'] < 2:
-            continue
-        else:"""
         if aglo != linea_anterior:
             if line['NIVEL_ED_str'] == 'Superior o universitario':
                 personas_educadas = line['PONDERA']
@@ -76,7 +74,21 @@ def ranking_aglomerados (lista_dic_I, lista_dic_H):#creanear
             if line['NIVEL_ED_str'] == 'Superior o universitario':
                 dic['sup_univer'] = line['PONDERA'] + dic['sup_univer']
         linea_anterior = aglo
+    
+    for pos_new_list in new_list:
+        for lineH in lista_ordenada_H:
+            if lineH['AGLOMERADO'] == pos_new_list['AGLOMERADO']:
+                break
+            elif lineH['IX_TOT'] < 2:
+                continue
+            else:
+                pos_new_list['cont_hogares'] = lineH['PONDERA']
+    
     print(new_list)
+
+
+            
+        
             
 #Informar para cada aglomerado el porcentaje de personas que hayan cursado al 
 #menos en nivel universitario o superior
