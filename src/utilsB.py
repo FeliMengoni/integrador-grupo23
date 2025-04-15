@@ -60,26 +60,38 @@ def ranking_aglomerados (lista_dic_I, lista_dic_H):#creanear
     new_list = []
     dic = {}
     cont_hogares = 0
+    linea_anterior = ''
     for line in lista_ordenada_I:
         aglo = line['AGLOMERADO']
-        if line['IX_Tot'] < 2:
+        """if line['IX_Tot'] < 2:
             continue
+        else:"""
+        if aglo != linea_anterior:
+            if line['NIVEL_ED_str'] == 'Superior o universitario':
+                personas_educadas = line['PONDERA']
+            dic = {'AGLOMERADO': aglo, 'cant_personas': line['PONDERA'], 'sup_univer': personas_educadas}
+            new_list.append(dic)
         else:
+            dic['cant_personas'] = dic['cant_personas'] + line['PONDERA']
+            if line['NIVEL_ED_str'] == 'Superior o universitario':
+                dic['sup_univer'] = line['PONDERA'] + dic['sup_univer']
+        linea_anterior = aglo
+    print(new_list)
             
- #Informar para cada aglomerado el porcentaje de personas que hayan cursado al 
+#Informar para cada aglomerado el porcentaje de personas que hayan cursado al 
 #menos en nivel universitario o superior
-def porcentaje_universitario (dic):
- total_personas = 0
- total_universitario = 0
-#recorro y sumo las personas en total y las q estudiaron
- for linea in dic:
-    personas=(linea["PONDERA"])
-    nivel_to_string(linea)
-    if ["NIVEL_ED_str"] == 'Superior o universitario':
-        total_universitario += personas
-        total_personas += personas
-#hago el porcentaje 
-    if total_personas > 0:
-        porcentaje = (total_universitario / total_personas) * 100
-    else:
-        porcentaje = 0
+"""def porcentaje_universitario (dic):
+    total_personas = 0
+    total_universitario = 0
+    #recorro y sumo las personas en total y las q estudiaron
+    for linea in dic:
+        personas=(linea["PONDERA"])
+        nivel_to_string(linea)
+        if ["NIVEL_ED_str"] == 'Superior o universitario':
+            total_universitario += personas
+            total_personas += personas
+        #hago el porcentaje 
+        if total_personas > 0:
+            porcentaje = (total_universitario / total_personas) * 100
+        else:
+            porcentaje = 0"""
