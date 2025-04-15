@@ -66,4 +66,20 @@ def ranking_aglomerados (lista_dic_I, lista_dic_H):#creanear
             continue
         else:
             
-            
+ #Informar para cada aglomerado el porcentaje de personas que hayan cursado al 
+#menos en nivel universitario o superior
+def porcentaje_universitario (dic):
+ total_personas = 0
+ total_universitario = 0
+#recorro y sumo las personas en total y las q estudiaron
+ for linea in dic:
+    personas=(linea["PONDERA"])
+    nivel_to_string(linea)
+    if ["NIVEL_ED_str"] == 'Superior o universitario':
+        total_universitario += personas
+        total_personas += personas
+#hago el porcentaje 
+    if total_personas > 0:
+        porcentaje = (total_universitario / total_personas) * 100
+    else:
+        porcentaje = 0
