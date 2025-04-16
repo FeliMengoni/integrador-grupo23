@@ -45,6 +45,6 @@ def menor_desocupacion (lista_dic):
     anio,trim=None,None
     desempleo= 0
     lista_dic_orden = sorted(lista_dic, key=lambda x: (x['ANO4'],x['TRIMESTRE']))
-    for dic in lista_dic:
-        if dic
+    for dic in lista_dic_orden:
+        
 
