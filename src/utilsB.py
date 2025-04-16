@@ -70,7 +70,6 @@ def porcentaje_universitario (dic):
     """Informar para cada aglomerado el porcentaje de personas que hayan cursado al 
     menos en nivel universitario o superior"""
     dicO = sorted(dic, key = lambda x:x['AGLOMERADO'])
-
     total_personas = 1
     total_universitario = 1
     anterior = ''
@@ -83,9 +82,9 @@ def porcentaje_universitario (dic):
             print(total_universitario)
             porcentaje = total_universitario/total_personas*100
             total_personas=(linea["PONDERA"])
+            total_universitario = 0
             if linea["NIVEL_ED"] == 5 or linea['NIVEL_ED'] == 6:
                 total_universitario = total_personas
-            
         else: 
             total_personas += linea['PONDERA']
             if linea["NIVEL_ED"] == 5 or linea['NIVEL_ED'] == 6:
