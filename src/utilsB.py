@@ -51,59 +51,46 @@ def no_nacidas (lista): # Recibe la lista de diccionarios / CH15: donde nacio
     desempleo= 0
     lista_dic_orden = sorted(lista_dic, key=lambda x: (x['ANO4'],x['TRIMESTRE']))
     for dic in lista_dic:
-        if dic:"""
+        if dic:
 
 def ranking_aglomerados (lista_dic_I, lista_dic_H):#creanear
-    """Ranking 5 aglomerados mayor porcentaje con dos o mas ocupantes con estudios universitarios"""  
+    Ranking 5 aglomerados mayor porcentaje con dos o mas ocupantes con estudios universitarios 
     lista_ordenada_I = sorted(lista_dic_I, key=lambda x: x["AGLOMERADO"])
     lista_ordenada_H = sorted(lista_dic_H, key=lambda x: x["AGLOMERADO"])
     new_list = []
     dic = {}
     cont_hogares = 0
-    linea_anterior = ''
-
     for line in lista_ordenada_I:
         aglo = line['AGLOMERADO']
-        if aglo != linea_anterior:
-            if line['NIVEL_ED_str'] == 'Superior o universitario':
-                personas_educadas = line['PONDERA']
-            dic = {'AGLOMERADO': aglo, 'cant_personas': line['PONDERA'], 'sup_univer': personas_educadas}
-            new_list.append(dic)
-        else:
-            dic['cant_personas'] = dic['cant_personas'] + line['PONDERA']
-            if line['NIVEL_ED_str'] == 'Superior o universitario':
-                dic['sup_univer'] = line['PONDERA'] + dic['sup_univer']
-        linea_anterior = aglo
-    
-    for pos_new_list in new_list:
-        for lineH in lista_ordenada_H:
-            if lineH['AGLOMERADO'] == pos_new_list['AGLOMERADO']:
-                break
-            elif lineH['IX_TOT'] < 2:
-                continue
-            else:
-                pos_new_list['cont_hogares'] = lineH['PONDERA']
-    
-    print(new_list)
-
-
+        if line['IX_Tot'] < 2:
+            continue
+        else:"""
             
-        
-            
-#Informar para cada aglomerado el porcentaje de personas que hayan cursado al 
-#menos en nivel universitario o superior
-"""def porcentaje_universitario (dic):
-    total_personas = 0
-    total_universitario = 0
+def porcentaje_universitario (dic):
+    """Informar para cada aglomerado el porcentaje de personas que hayan cursado al 
+    menos en nivel universitario o superior"""
+    dicO = sorted(dic, key = lambda x:x['AGLOMERADO'])
+
+    total_personas = 1
+    total_universitario = 1
+    anterior = ''
+    porcentaje = 0
     #recorro y sumo las personas en total y las q estudiaron
-    for linea in dic:
-        personas=(linea["PONDERA"])
-        nivel_to_string(linea)
-        if ["NIVEL_ED_str"] == 'Superior o universitario':
-            total_universitario += personas
-            total_personas += personas
-        #hago el porcentaje 
-        if total_personas > 0:
-            porcentaje = (total_universitario / total_personas) * 100
-        else:
-            porcentaje = 0"""
+    for linea in dicO:
+        if linea["AGLOMERADO"] != anterior:
+            print(anterior, " ", round(porcentaje, 2),"%")
+            print(total_personas)
+            print(total_universitario)
+            porcentaje = total_universitario/total_personas*100
+            total_personas=(linea["PONDERA"])
+            if linea["NIVEL_ED"] == 5 or linea['NIVEL_ED'] == 6:
+                total_universitario = total_personas
+            
+        else: 
+            total_personas += linea['PONDERA']
+            if linea["NIVEL_ED"] == 5 or linea['NIVEL_ED'] == 6:
+                total_universitario += linea['PONDERA']
+            porcentaje = total_universitario/total_personas*100
+            
+    
+        anterior = linea['AGLOMERADO']
