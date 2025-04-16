@@ -29,14 +29,14 @@ def nivel_to_string(dic):
 
 def condicion_laboral_to_string (dic): 
     """Funcion que agrega culumna de condicion laboral"""
-    if (int(dic["ESTADO"]) == 1) and (int(dic["CAT_OCUP"])== 1 or 2):
+    if (int(dic["ESTADO"]) == 1) and (int(dic["ESTADO"])== 1 or 2):
         dic["CONDICION_LABORAL"]=('Ocupado autónomo')
-    if (int(dic["ESTADO"]) == 1) and (int(dic["CAT_OCUP"])== 3 or 4 or 9):
+    if (int(dic["ESTADO"]) == 1) and (int(dic["ESTADO"])== 3 or 4 or 9):
         dic["CONDICION_LABORAL"]=('Ocupado dependiente')
     if (int(dic["ESTADO"]) == 2):
         dic["CONDICION_LABORAL"]=('Desocupado')
     if (int(dic["ESTADO"]) == 3):
-        dic["CONDICION_LABORAL"]=('Inactivo')ho
+        dic["CONDICION_LABORAL"]=('Inactivo')
     if (int(dic["ESTADO"]) == 4):
         dic["CONDICION_LABORAL"]=('Fuera de categoria')  
 

@@ -3,6 +3,7 @@ from pathlib import Path
 import csv
 from src import utils
 from src import datacleaner
+from src import utilsB
 
 #unimos las bases de datos de hogar e individuo
 
@@ -15,11 +16,14 @@ with open(ruta_hogares, 'r', encoding='utf-8') as archivo_hogares:
    datosH = list(csv.DictReader(archivo_hogares, delimiter=';'))
 
 datacleaner.cleanerU(datosU)
-datacleaner.cleanerH(datosH)  
+datacleaner.cleanerH(datosH)
+utilsB.porcentaje_de_leer(datosU)
+#utilsB.ranking_aglomerados(datosU, datosH)
+utilsB.porcentaje_universitario(datosU)
    
-print(datosU[:5])
+"""print(datosU[:5])
 print('='*50)
-print(datosH[:5])
+print(datosH[:5])"""
 
 
 
