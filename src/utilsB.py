@@ -51,7 +51,7 @@ def no_nacidas (lista): # Recibe la lista de diccionarios / CH15: donde nacio
     desempleo= 0
     lista_dic_orden = sorted(lista_dic, key=lambda x: (x['ANO4'],x['TRIMESTRE']))
     for dic in lista_dic:
-        if dic:
+        if dic:"""
 
 def merge_diccionarios_por_clave(lista1, lista2, clave_fusion):
     """
@@ -80,22 +80,16 @@ def merge_diccionarios_por_clave(lista1, lista2, clave_fusion):
     return resultado
 
 def ranking_aglomerados (lista_dic_I, lista_dic_H):#creanear
-<<<<<<< HEAD
     """Ranking 5 aglomerados mayor porcentaje con dos o mas ocupantes con estudios universitarios"""  
     
     # Ordeno las listas de diccionarios por CODUSU y AGLOMERADO
     lista_ordenada_I = sorted(lista_dic_I, key=lambda x: x["CODUSU"])
-=======
-    Ranking 5 aglomerados mayor porcentaje con dos o mas ocupantes con estudios universitarios 
-    lista_ordenada_I = sorted(lista_dic_I, key=lambda x: x["AGLOMERADO"])
->>>>>>> 94b77db07267e57220bb06738b5df1434da620e9
     lista_ordenada_H = sorted(lista_dic_H, key=lambda x: x["AGLOMERADO"])
     
     # Inicializo las variables necesarias para el programa
     new_list = []
     dic = {}
     cont_hogares = 0
-<<<<<<< HEAD
     linea_anterior = ''
 
     # Obtengo las variables necesarias y las agrego a una nueva lista de diccionarios
@@ -123,28 +117,24 @@ def ranking_aglomerados (lista_dic_I, lista_dic_H):#creanear
     # Inicializamos variables necesarias
     linea_anterior = ''
     new_dic = {}
+    personas = 0
+    universitarios = 0
 
     # Lleno la nueva lista en la que guardo el porcentaje y el aglomerado
     # Tengo que hacer que se agregue ultimo por ahi 
     for line in mergeado:
         aglo = line['aglo']
-        
-        dic = {'AGLOMERADO': aglo}
+        personas += line['cant_personas']
+        if line['IX_TOT'] > 1:
+            universitarios += line['sup_univer']
         if aglo != linea_anterior:
-            if line['IX_TOT'] > 1:
-                universitarios = line['sup_univer']
-            personas = line['cant_personas']
-            new_dic = {'AGLOMERADO': aglo, 'PORCENTAJE': 0}
+            new_dic = {'AGLOMERADO': aglo, 'PORCENTAJE': round(universitarios/personas*100, 2)}
             new_list.append(new_dic)
-        else:
-            if line['IX_TOT'] > 1:
-                universitarios += line['sup_univer']
-            personas += line['cant_personas']
+            personas = 0
+            universitarios = 0
+        linea_anterior = aglo
             
-
-
-
-    print(merge_diccionarios_por_clave(new_list, lista_ordenada_H, 'CODUSU'))
+    print(new_list)
 
     '''linea_anterior = ''
     listn = []
@@ -165,13 +155,6 @@ def ranking_aglomerados (lista_dic_I, lista_dic_H):#creanear
 
     'print(new_list)'
 
-=======
-    for line in lista_ordenada_I:
-        aglo = line['AGLOMERADO']
-        if line['IX_Tot'] < 2:
-            continue
-        else:"""
->>>>>>> 94b77db07267e57220bb06738b5df1434da620e9
             
 def porcentaje_universitario (dic):
     """Informar para cada aglomerado el porcentaje de personas que hayan cursado al 
