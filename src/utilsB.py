@@ -53,39 +53,111 @@ def no_nacidas (lista): # Recibe la lista de diccionarios / CH15: donde nacio
     for dic in lista_dic:
         if dic:"""
 
+def merge_diccionarios_por_clave(lista1, lista2, clave_fusion):
+    """
+    Mergea dos listas de diccionarios por un valor común.
+    """
+
+    mergeado = {}
+
+    # Crear el diccionario de mapeo con la primera lista
+    for diccionario in lista1:
+        valor_clave = diccionario['CODUSU']
+        if valor_clave is not None:
+            mergeado[valor_clave] = diccionario.copy() # Usar .copy() para evitar modificaciones
+
+    # Combinar con la segunda lista
+    for diccionario in lista2:
+        valor_clave = diccionario['CODUSU']
+        if valor_clave is not None:
+            if valor_clave in mergeado:
+                mergeado[valor_clave].update(diccionario)
+            else:
+                mergeado[valor_clave] = diccionario.copy()
+
+    # Convertir a lista de diccionarios (opcional)
+    resultado = list(mergeado.values())
+    return resultado
+
 def ranking_aglomerados (lista_dic_I, lista_dic_H):#creanear
     """Ranking 5 aglomerados mayor porcentaje con dos o mas ocupantes con estudios universitarios"""  
-    lista_ordenada_I = sorted(lista_dic_I, key=lambda x: x["AGLOMERADO"])
+    
+    # Ordeno las listas de diccionarios por CODUSU y AGLOMERADO
+    lista_ordenada_I = sorted(lista_dic_I, key=lambda x: x["CODUSU"])
     lista_ordenada_H = sorted(lista_dic_H, key=lambda x: x["AGLOMERADO"])
+    
+    # Inicializo las variables necesarias para el programa
     new_list = []
     dic = {}
     cont_hogares = 0
     linea_anterior = ''
 
+    # Obtengo las variables necesarias y las agrego a una nueva lista de diccionarios
     for line in lista_ordenada_I:
-        aglo = line['AGLOMERADO']
-        if aglo != linea_anterior:
+        codusu = line['CODUSU']
+        if codusu != linea_anterior:
             if line['NIVEL_ED_str'] == 'Superior o universitario':
                 personas_educadas = line['PONDERA']
-            dic = {'AGLOMERADO': aglo, 'cant_personas': line['PONDERA'], 'sup_univer': personas_educadas}
+            else:
+                personas_educadas = 0
+            dic = {'CODUSU': codusu, 'aglo': line['AGLOMERADO'], 'cant_personas': line['PONDERA'], 'sup_univer': personas_educadas}
             new_list.append(dic)
         else:
             dic['cant_personas'] = dic['cant_personas'] + line['PONDERA']
             if line['NIVEL_ED_str'] == 'Superior o universitario':
                 dic['sup_univer'] = line['PONDERA'] + dic['sup_univer']
-        linea_anterior = aglo
+        linea_anterior = codusu
     
-    for pos_new_list in new_list:
-        for lineH in lista_ordenada_H:
-            if lineH['AGLOMERADO'] == pos_new_list['AGLOMERADO']:
-                break
-            elif lineH['IX_TOT'] < 2:
-                continue
-            else:
-                pos_new_list['cont_hogares'] = lineH['PONDERA']
-    
-    print(new_list)
+    new_list = sorted(new_list, key=lambda x: x["aglo"])
+    mergeado = merge_diccionarios_por_clave(new_list, lista_dic_H, 'CODUSU')
 
+    # Vaciamos la lista que ya no nos sirve y empezamos a insertar solo la informacion necesaria
+    new_list = []
+
+    # Inicializamos variables necesarias
+    linea_anterior = ''
+    new_dic = {}
+
+    # Lleno la nueva lista en la que guardo el porcentaje y el aglomerado
+    # Tengo que hacer que se agregue ultimo por ahi 
+    for line in mergeado:
+        aglo = line['aglo']
+        
+        dic = {'AGLOMERADO': aglo}
+        if aglo != linea_anterior:
+            if line['IX_TOT'] > 1:
+                universitarios = line['sup_univer']
+            personas = line['cant_personas']
+            new_dic = {'AGLOMERADO': aglo, 'PORCENTAJE': 0}
+            new_list.append(new_dic)
+        else:
+            if line['IX_TOT'] > 1:
+                universitarios += line['sup_univer']
+            personas += line['cant_personas']
+            
+
+
+
+    print(merge_diccionarios_por_clave(new_list, lista_ordenada_H, 'CODUSU'))
+
+    '''linea_anterior = ''
+    listn = []
+    dicn = {}
+    conta = 0
+    for line in new_list:
+        aglo = line['aglo']
+        if aglo != linea_anterior: 
+            dicn = {'aglo': aglo, 'cont': 1}
+            listn.append(dicn)
+        else:
+            dicn['cont'] += 1
+        conta += 1
+        
+        linea_anterior = aglo
+    print(listn)
+    print(conta)'''
+
+    'print(new_list)'
 
             
         
