@@ -82,31 +82,40 @@ def merge_diccionarios_por_clave(lista1, lista2, clave_fusion):
 def ranking_aglomerados (lista_dic_I, lista_dic_H): # TERMINAR TEMA DE LOS ULTIMOS 2 REPORTES
     """Ranking 5 aglomerados mayor porcentaje con dos o mas ocupantes con estudios universitarios"""  
     
-    # Ordeno las listas de diccionarios por CODUSU y AGLOMERADO
+    # Ordeno la lista de diccionarios por CODUSU
     lista_ordenada_I = sorted(lista_dic_I, key=lambda x: x["CODUSU"])
-    lista_ordenada_H = sorted(lista_dic_H, key=lambda x: x["AGLOMERADO"])
     
     # Inicializo las variables necesarias para el programa
     new_list = []
     dic = {}
-    cont_hogares = 0
     linea_anterior = ''
+    personas = 0
+    universitarios = 0
 
     # Obtengo las variables necesarias de Individuo y las agrego a una nueva lista de diccionarios (ACOMODAR BIEN, dar vuelta la condicion de si es distinto)
     for line in lista_ordenada_I:
+        
         codusu = line['CODUSU']
-        if codusu != linea_anterior:
-            if line['NIVEL_ED_str'] == 'Superior o universitario':
-                personas_educadas = line['PONDERA']
-            else:
-                personas_educadas = 0
-            dic = {'CODUSU': codusu, 'aglo': line['AGLOMERADO'], 'cant_personas': line['PONDERA'], 'sup_univer': personas_educadas}
+
+        # Si no es la primera iteracion y cambia el codusu, agrego el nuevo diccionario
+        if codusu != linea_anterior and line != lista_ordenada_I:
+            
+            dic = {'CODUSU': codusu, 'aglo': line['AGLOMERADO'], 'cant_personas': personas, 'sup_univer': universitarios}
             new_list.append(dic)
-        else:
-            dic['cant_personas'] = dic['cant_personas'] + line['PONDERA']
-            if line['NIVEL_ED_str'] == 'Superior o universitario':
-                dic['sup_univer'] = line['PONDERA'] + dic['sup_univer']
+            personas = 0
+            universitarios = 0
+        
+        # Contador de personas y universitarios
+        personas += line['PONDERA']
+        if line['NIVEL_ED_str'] == 'Superior o universitario':
+            universitarios += line['PONDERA']
+
         linea_anterior = codusu
+        
+        # Sentencia que asegura que la ultima posicion va a ser agregada a la lista
+        if line == lista_ordenada_I[-1]:
+            dic = {'CODUSU': codusu, 'aglo': line['AGLOMERADO'], 'cant_personas': personas, 'sup_univer': universitarios}
+            new_list.append(dic)
     
     # Ordenando la lista nueva para luego mergearla con la lista de hogares agrupandola por CODUSU
     new_list = sorted(new_list, key=lambda x: x["aglo"])
@@ -117,7 +126,7 @@ def ranking_aglomerados (lista_dic_I, lista_dic_H): # TERMINAR TEMA DE LOS ULTIM
 
     # Inicializamos variables necesarias
     linea_anterior = ''
-    new_dic = {}
+    dic = {}
     personas = 0
     universitarios = 0
 
@@ -128,8 +137,8 @@ def ranking_aglomerados (lista_dic_I, lista_dic_H): # TERMINAR TEMA DE LOS ULTIM
 
         # Si es distinto agrega el diccionario anterior y resetea los contadores
         if aglo != linea_anterior and line != mergeado[0]: # La segunda condicion es para que no se ejecute una vez pasa al siguiente aglomerado
-            new_dic = {'AGLOMERADO': linea_anterior, 'PORCENTAJE': round(universitarios/personas*100, 2)}
-            new_list.append(new_dic)
+            dic = {'AGLOMERADO': linea_anterior, 'PORCENTAJE': round(universitarios/personas*100, 2)}
+            new_list.append(dic)
             personas = 0
             universitarios = 0
         
@@ -142,8 +151,8 @@ def ranking_aglomerados (lista_dic_I, lista_dic_H): # TERMINAR TEMA DE LOS ULTIM
 
         # En caso de que sea la ultima linea, agrega el ultimo diccionario a la lista
         if line == mergeado[-1]:
-            new_dic = {'AGLOMERADO': linea_anterior, 'PORCENTAJE': round(universitarios/personas*100, 2)}
-            new_list.append(new_dic)
+            dic = {'AGLOMERADO': linea_anterior, 'PORCENTAJE': round(universitarios/personas*100, 2)}
+            new_list.append(dic)
     
     # Codigo que ordena a la nueva lista por el porcentaje (de mayor a menor)
     new_list = sorted(new_list, key=lambda x: x["PORCENTAJE"], reverse=True)
